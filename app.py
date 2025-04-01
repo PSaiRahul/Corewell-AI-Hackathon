@@ -2,13 +2,16 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sklearn.cluster import KMeans
-from snowflake_utils import get_provider_summary
+# from snowflake_utils import get_provider_summary
 from sklearn.preprocessing import StandardScaler
+from snowflake.snowpark.context import get_active_session
  
 st.set_page_config(layout="wide")
 st.title("Clinical Productivity & Risk Dashboard")
  
-df = get_provider_summary()
+# df = get_provider_summary()
+session = get_active_session()
+df = session.table("ENT_AI_HACKATHON_BTWS.PERUMALLA.PROVIDER_SUMMARY").to_pandas()
 
 # Data Preprocessing - Fill NaN values to avoid plotly breaking the chart
 df["AVG_PATIENT_RISK"] = df["AVG_PATIENT_RISK"].fillna(0)
