@@ -70,15 +70,19 @@ col3.metric("Total Procedures", int(df["TOTAL_PROCEDURES"].sum()))
  
 # Bubble Chart
 st.subheader("Provider Productivity vs Patient Risk")
-fig = px.scatter(
-    df,
-    x="TOTAL_ENCOUNTERS",
-    y="TOTAL_PROCEDURES",
-    size="AVG_PATIENT_RISK",
-    color="CLUSTER_LABEL",
-    hover_name="NAME",
-    title="Provider Productivity Clustering"
-)
+if not df.empty:
+    fig = px.scatter(
+        df,
+        x="TOTAL_ENCOUNTERS",
+        y="TOTAL_PROCEDURES",
+        size="AVG_PATIENT_RISK",
+        color="CLUSTER_LABEL",
+        hover_name="NAME",
+        title="Provider Productivity Clustering"
+    )
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.warning("No data to display. Try adjusting the filters.")
 
 st.subheader("Patient Risk Level Distribution")
  
