@@ -70,9 +70,10 @@ col3.metric("Total Procedures", int(df["TOTAL_PROCEDURES"].sum()))
  
 # Bubble Chart
 st.subheader("Provider Productivity vs Patient Risk")
-if not df.empty:
+scatter_df = df.dropna(subset=["TOTAL_ENCOUNTERS","TOTAL_PROCEDURES","AVG_PATIENT_RISK"])
+if not scatter_df.empty:
     fig = px.scatter(
-        df,
+        scatter_df,
         x="TOTAL_ENCOUNTERS",
         y="TOTAL_PROCEDURES",
         size="AVG_PATIENT_RISK",
@@ -92,6 +93,8 @@ risk_counts.columns = ["Risk Level", "Count"]
 fig_risk = px.pie(risk_counts, names="Risk Level", values="Count", title="Risk Category Breakdown")
 st.plotly_chart(fig_risk, use_container_width=True)
 
+df = df[df["LAT"].notna() & df["LON"].notna()]
+
 if "LAT" in df.columns and "LON" in df.columns:
     st.subheader("Provider Location Map")
     fig_map = px.scatter_mapbox(
@@ -104,6 +107,12 @@ if "LAT" in df.columns and "LON" in df.columns:
         mapbox_style="open-street-map",
         zoom=3,
         title="Provider Locations Colored by Risk Level"
+    )
+    fig_map.update_layout(
+        mapbox=dict(
+           zoom=3,
+           center={"lat":37.5, "lon":-95}
+        )
     )
     st.plotly_chart(fig_map, use_container_width=True)
 else:
