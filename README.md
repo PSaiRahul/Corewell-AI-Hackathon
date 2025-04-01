@@ -1,18 +1,20 @@
-Gap
+Gap:
+
 Health systems often struggle to objectively assess provider performance when treating patients of varying complexity. Existing productivity metrics (like number of encounters or procedures) fail to adjust for patient risk, leading to inaccurate comparisons and inefficient resource planning.
  
-Orientation
+Orientation:
+
 While analyzing synthetic clinical data from multiple Snowflake tables (PROVIDERS, ENCOUNTERS, PROCEDURES, PATIENTS, and CONDITIONS), I discovered that productivity insights lacked clinical context. This oversight follows a common trend in healthcare analytics—volume-focused metrics without quality or complexity adjustments.
  
-Impact
+Impact:
+
 Without proper adjustment for patient risk:
 •	High-performing providers treating complex patients may appear less productive.
 •	Resources may be misallocated, leading to burnout, poor patient outcomes, and financial waste.
 •	Administrators and planners lack meaningful benchmarks to improve care delivery or optimize performance.
  
+Importance:
 
-
-Importance
 With growing pressure on healthcare systems to deliver value-based care, it’s critical to shift from quantity-based evaluations to context-aware provider performance metrics. This directly impacts:
 •	Strategic workforce planning
 •	Quality-of-care initiatives
@@ -20,12 +22,14 @@ With growing pressure on healthcare systems to deliver value-based care, it’s 
 •	Patient safety and outcomes
 
 What Tools Are We Using? 
+
 •	Data Source: Snowflake (read-only shared Synthea data + Feature Engineered fields)
 •	Backend: Python with Snowflake Connector (externalbrowser authentication)
 •	ML/Analytics: scikit-learn (KMeans), pandas, plotly
 •	UI: Streamlit (interactive dashboard with filters, charts, and maps)
  
-Our Solution
+Our Solution:
+
 I built an interactive Streamlit dashboard that:
 •	Ranks providers based on procedure volume, encounter count, and patient risk
 •	Uses quantile-based risk scoring to classify providers as Stable, Monitor, or Chronic Risk
