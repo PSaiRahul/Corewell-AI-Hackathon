@@ -1,3 +1,177 @@
+DoxIQ
+ 
+Uncover the story behind every score
+ 
+ 
+---
+ 
+Overview
+ 
+DoxIQ is an AI-powered, interactive dashboard that brings context and fairness to evaluating clinical provider performance. It transforms traditional volume-based metrics into nuanced, risk-aware insights that help healthcare leaders make smarter, more equitable decisions.
+ 
+ 
+---
+ 
+Problem Statement
+ 
+Gap
+ 
+Health systems often struggle to objectively assess provider performance when treating patients of varying complexity. Existing productivity metrics (like number of encounters or procedures) fail to adjust for patient risk, leading to inaccurate comparisons and inefficient resource planning.
+ 
+Orientation
+ 
+While analyzing synthetic clinical data from multiple Snowflake tables (PROVIDERS, ENCOUNTERS, PROCEDURES, PATIENTS, and CONDITIONS), I discovered that productivity insights lacked clinical context. This oversight reflects a common trend in healthcare analytics: volume-focused metrics without adjustments for quality or complexity.
+ 
+Impact
+ 
+Without proper adjustment for patient risk:
+ 
+High-performing providers treating complex patients may appear less productive
+ 
+Resources may be misallocated, leading to burnout, poor patient outcomes, and financial waste
+ 
+Administrators and planners lack meaningful benchmarks to improve care delivery
+ 
+ 
+Importance
+ 
+As the healthcare industry shifts toward value-based care, it is essential to move beyond quantity-based metrics. Context-aware provider performance evaluation supports:
+ 
+Strategic workforce planning
+ 
+Quality-of-care initiatives
+ 
+Financial forecasting
+ 
+Patient safety and outcome tracking
+ 
+ 
+ 
+---
+ 
+Tech Stack
+ 
+Data Sources
+ 
+Snowflake: Read-only shared Synthea data, with engineered features
+ 
+ 
+Backend
+ 
+Python: Core logic
+ 
+Snowflake Connector: Secure connection using external browser auth
+ 
+ 
+Machine Learning & Analytics
+ 
+pandas: Data wrangling
+ 
+scikit-learn: KMeans clustering
+ 
+plotly: Interactive charting
+ 
+ 
+Frontend
+ 
+Streamlit: Web UI with filters, charts, and maps
+ 
+ 
+ 
+---
+ 
+Solution Features
+ 
+DoxIQ enables smarter provider evaluation by offering:
+ 
+Risk-adjusted ranking based on procedure volume, encounter count, and patient complexity
+ 
+Quantile-based risk scoring (Stable, Monitor, Chronic Risk)
+ 
+ML-driven provider clustering: Balanced, Procedure Heavy, Encounter Heavy
+ 
+Dynamic filters: specialty, state, and more
+ 
+Geographic visualization of providers
+ 
+Exportable summaries for leadership analysis and reporting
+ 
+ 
+ 
+---
+ 
+Glossary of Key Metrics
+ 
+Total Encounters
+ 
+Definition: Number of patient visits/clinical interactions per provider
+Why it matters: Frequency of care—but doesn’t reflect complexity on its own
+ 
+Total Procedures
+ 
+Definition: Total interventions or procedures performed
+Why it matters: Differentiates intervention-heavy providers from consultative ones
+ 
+Average Patient Risk Score
+ 
+Definition: Average number of distinct medical conditions per patient per provider
+Calculation: Risk = count of unique conditions; averaged per provider
+Why it matters: Adjusts performance by clinical complexity
+ 
+Risk Level
+ 
+Definition: Qualitative risk category per provider's patient pool
+Labels:
+ 
+Stable: Low complexity
+ 
+Monitor: Medium complexity
+ 
+Chronic Risk: High complexity
+How it’s calculated: Based on quantiles of AVG_PATIENT_RISK
+ 
+ 
+Cluster Label (via KMeans)
+ 
+Definition: Groups providers by clinical workload profile
+ 
+Balanced Performer
+ 
+Procedure Heavy
+ 
+Encounter Heavy
+Why it matters: Reveals hidden patterns for operational insight
+ 
+ 
+Filtered Providers
+ 
+Definition: Unique providers currently visible based on filters
+ 
+Total Providers
+ 
+Definition: All unique providers in the full dataset
+ 
+Provider Location Map
+ 
+Definition: Geo-visualization by latitude & longitude
+Why it matters: Identifies regional risk hotspots, resource gaps
+ 
+Risk Category Pie Chart
+ 
+Definition: Visual distribution of providers by risk category
+Why it matters: Snapshot of provider complexity network-wide
+ 
+ 
+---
+
+ 
+Author
+ 
+Sai Rahul Perumalla
+Team: Table for One
+
+
+
 Gap:
 
 Health systems often struggle to objectively assess provider performance when treating patients of varying complexity. Existing productivity metrics (like number of encounters or procedures) fail to adjust for patient risk, leading to inaccurate comparisons and inefficient resource planning.
