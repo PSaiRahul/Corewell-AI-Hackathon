@@ -4,15 +4,21 @@ import plotly.express as px
 from sklearn.cluster import KMeans
 # from snowflake_utils import get_provider_summary
 from sklearn.preprocessing import StandardScaler
-from snowflake.snowpark.context import get_active_session
  
 st.set_page_config(layout="wide")
 st.image("Updated_DoxIQ_Logo.PNG", width=250)
 
+try:
+   from snowflake.snowpark.context import get_active_session
+   session = get_active_session()
+except ImportError:
+   session = None
 
 # df = get_provider_summary()
-session = get_active_session()
-df = session.table("ENT_AI_HACKATHON_BTWS.PERUMALLA.PROVIDER_SUMMARY").to_pandas()
+if session:
+    df = session.table("ENT_AI_HACKATHON_BTWS.PERUMALLA.PROVIDER_SUMMARY").to_pandas()
+else:
+    st.error("This app must be run  inside Snowflake to access the data.")
 
 # Data Preprocessing - Fill NaN values to avoid plotly breaking the chart
 df["AVG_PATIENT_RISK"] = df["AVG_PATIENT_RISK"].fillna(0)
