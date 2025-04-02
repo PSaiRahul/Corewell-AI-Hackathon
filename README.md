@@ -133,7 +133,8 @@ Total Providers
 Risk Category Pie Chart
    Definition: A visual distribution of providers across Stable, Monitor, and Chronic Risk categories.
 
-   Why it matters: Gives a high-level view of how complexity is spread across the provider network.
+   Why it matters: 
+   Gives a high-level view of how complexity is spread across the provider network.
 ---
 
  
